@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { AuthContextProvider } from './src/context/AuthProvider';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useAuthContext } from './src/hooks/useAuthContext';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+function Home()
+{
+  return(
+    <View>
+      <Text>Home</Text>
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+
+  //const { user } = useAuthContext();
+  const user = 'Teste'
+
+  return (
+    <AuthContextProvider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={user ? 'Home': 'Login'}>
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    </AuthContextProvider>
+  );
+}
