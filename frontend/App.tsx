@@ -1,18 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import InitialPage from './pages/InitialPage';
-import YourPlaylists from './pages/YourPlaylists';
+import { AuthContextProvider } from './src/context/AuthProvider';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useAuthContext } from './src/hooks/useAuthContext';
+
+const Stack = createNativeStackNavigator();
+import { Home } from './src/pages/Home';
 
 export default function App() {
+
+  //const { user } = useAuthContext();
+  const user = 'Teste'
+
   return (
-    <View style={styles.container}>
-      <Header />
-        <YourPlaylists />
-      <Footer />
-    </View>
-  );
+    <AuthContextProvider>
+    <NavigationContainer>
+          <Stack.Navigator initialRouteName={user ? 'Home': 'Login'}>
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    </AuthContextProvider>
+  )
 }
 
 const styles = StyleSheet.create({
