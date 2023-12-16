@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from "react-native";
-import YourPlaylist from "../components/YourPlaylist";
+import YourPlaylist from "../components/Playlist/YourPlaylist";
 
 const YourPlaylists = (props: any) => {
     return (

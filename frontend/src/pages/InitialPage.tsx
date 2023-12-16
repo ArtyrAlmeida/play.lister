@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import MainPlaylist from "../components/MainPlaylist";
+import MainPlaylist from "../components/Playlist/MainPlaylist";
 
 const InitialPage = (props: any) => {
     return (

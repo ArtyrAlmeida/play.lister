@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import InitialPage from '../../pages/InitialPage';
-import YourPlaylists from '../../pages/YourPlaylists';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import InitialPage from './InitialPage';
+import YourPlaylists from './YourPlaylists';
 
 const Home = () => {
     return(

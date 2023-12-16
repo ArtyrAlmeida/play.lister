@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
-const userIcon = require('../assets/icons/user-icon.png');
-const homeIcon = require('../assets/icons/home-icon.png');
+const userIcon = require('../../assets/icons/user-icon.png');
+const homeIcon = require('../../assets/icons/home-icon.png');
 
 const MainPlaylist = (props: any) => {
     return (
