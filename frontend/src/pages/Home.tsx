@@ -3,12 +3,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InitialPage from './InitialPage';
 import YourPlaylists from './YourPlaylists';
+import OtherUserProfile from './OtherUserProfile';
+import PlaylistDetail from './PlaylistDetail';
 
 const Home = () => {
-    return(
+    return (
         <View style={styles.container}>
             <Header />
-              <YourPlaylists />
+              <PlaylistDetail />
             <Footer />
         </View>
     )

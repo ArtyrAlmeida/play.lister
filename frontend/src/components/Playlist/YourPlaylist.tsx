@@ -15,7 +15,6 @@ const MainPlaylist = (props: any) => {
                     <Text style={styles.secondaryText}>Postado em: XX/XX/XXXX</Text>
                 </View>
             </View>
-            <View style={styles.horizontalLine}></View>
         </View>
     )
 }
@@ -24,7 +23,6 @@ const styles = StyleSheet.create({
     playlist: {
         flex: 0,
         flexDirection: 'row',
-        padding: 7,
         borderRadius: 5,
         marginBottom: 15
     },
@@ -45,12 +43,6 @@ const styles = StyleSheet.create({
     },
     textArea: {
         marginBottom: 18
-    },
-    horizontalLine: {
-        borderWidth: 1,
-        borderColor: '#ffffff',
-        width: '90%',
-        alignSelf: 'center'
     }
 })
 

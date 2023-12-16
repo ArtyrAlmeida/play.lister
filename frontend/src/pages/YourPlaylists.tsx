@@ -7,14 +7,23 @@ const YourPlaylists = (props: any) => {
             <Text style={styles.heading}>Suas Playlists</Text>
             <View style={styles.playlistList}>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
+                <View style={styles.horizontalLine}></View>
                 <YourPlaylist />
             </View>
         </View>
@@ -35,6 +44,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
         marginBottom: 30
+    },
+    horizontalLine: {
+        borderWidth: 1,
+        borderColor: '#ffffff',
+        width: '90%',
+        alignSelf: 'center'
     }
 })
 
