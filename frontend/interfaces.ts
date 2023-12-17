@@ -14,8 +14,14 @@ interface PlaylistInterface {
     songs: string[]
 }
 
+interface Error {
+    error: boolean,
+    message: string
+}
+
+
 interface InputCamps {
     label: string
 }
 
-export { UserInterface, InputCamps, PlaylistInterface }
+export { UserInterface, InputCamps, PlaylistInterface, Error }

@@ -4,12 +4,30 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ILoginUser, loginSchema } from "../../utils/loginFormSchema";
 import { Button } from "../Button/Button";
+import { loginUser } from "../../api/login";
+import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const LoginForm = ({navigation}:any) => {
-    const { control, handleSubmit, formState:{errors} } = useForm<ILoginUser>({resolver: zodResolver(loginSchema)})
+    const { control, handleSubmit, formState:{errors} } = useForm<ILoginUser>({resolver: zodResolver(loginSchema)});
+    const {loginError, setLoginError} = useState<any>({error: false, message: ''})
+    const { dispatch } = useAuthContext();
 
-    const handleUserLogin = (data:any) => {
-        console.log(data)
+    const handleUserLogin = async (data:any) => {
+        const response = await loginUser(data);
+        if(response){
+          setLoginError((err: any) => {
+            let newError = err;
+            newError['error'] = true;
+            newError['message'] = 'unable to realize login into app, please verify your credentials'
+
+            return newError
+          })
+        }
+
+        AsyncStorage.setItem("@user", response);
+        dispatch({type: "LOGIN", payload: response});  
     }
 
     return(
@@ -57,7 +75,9 @@ const LoginForm = ({navigation}:any) => {
                 </View>
                 </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
+            {}
         </View>
+        {loginError && <Text>{ loginError }</Text>}
         </>
     )
 }

@@ -22,5 +22,6 @@ const playlistController = new PlaylistController();
 playlistRouter.get('/', playlistController.find);
 playlistRouter.get('/:id', playlistController.findOne);
 playlistRouter.post('/', playlistController.create);
+playlistRouter.delete('/:id', playlistController.deleteOne);
 
 export { playlistRouter, userRouter, songsRouter };

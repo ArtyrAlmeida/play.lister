@@ -6,13 +6,10 @@ import { useAuthContext } from './src/hooks/useAuthContext';
 
 const Stack = createNativeStackNavigator();
 import { Home } from './src/pages/Home';
-import { MyProfile } from './src/pages/MyProfile';
-import InitialPage from './src/pages/InitialPage';
 
 export default function App() {
 
-  //const { user } = useAuthContext();
-  const user = 'Teste'
+  const { user } = useAuthContext();
 
   return (
     <AuthContextProvider>

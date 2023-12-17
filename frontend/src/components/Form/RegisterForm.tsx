@@ -4,15 +4,34 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { IRegisterUser, registerSchema } from "../../utils/registerFormSchema";
 import { Button } from "../Button/Button";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useState } from "react";
+import { registerUser } from "../../api/register";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const RegisterForm = () => {
     const { control, handleSubmit, formState:{errors} } = useForm<IRegisterUser>({resolver: zodResolver(registerSchema)})
+    const {loginError, setLoginError} = useState<any>({error: false, message: ''})
+    const { dispatch } = useAuthContext();
 
-    const handleUserLogin = (data:any) => {
-        console.log(data)
+    const handleUserLogin = async (data:any) => {
+      const response = await registerUser(data);
+      if(response){
+        setLoginError((err: any) => {
+          let newError = err;
+          newError['error'] = true;
+          newError['message'] = 'unable to register into app, please verify your credentials'
+
+          return newError
+        })
+      }
+
+      AsyncStorage.setItem("@user", response);
+      dispatch({type: "LOGIN", payload: response});  
     }
 
     return(
+      <>
         <View style={styles.formContainer}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                 <KeyboardAvoidingView behavior="position" enabled >
@@ -82,6 +101,8 @@ const RegisterForm = () => {
                 </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
         </View>
+        {loginError && <Text>{ loginError }</Text>}
+      </>
     )
 }
 
