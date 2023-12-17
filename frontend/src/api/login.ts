@@ -1,7 +1,8 @@
 import { UserInterface } from "../../interfaces";
+import host from "./host";
 
 const loginUser = async (user:UserInterface) => {
-    const response = await fetch(`http://localhost:3030/user/login`, {
+    const response = await fetch(`${host}/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

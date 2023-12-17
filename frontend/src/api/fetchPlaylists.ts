@@ -1,6 +1,8 @@
+import host from "./host";
+
 const fetchPlaylists = async () => {
     try {
-        const response = await fetch(`http://localhost:3030/playlist/`, {
+        const response = await fetch(`${host}/playlist/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -17,7 +17,7 @@ export default function App() {
   return (
     <AuthContextProvider>
     <NavigationContainer>
-          <Stack.Navigator initialRouteName={user ? 'Home': 'Login'}>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={user ? 'Home': 'Login'}>
         <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
