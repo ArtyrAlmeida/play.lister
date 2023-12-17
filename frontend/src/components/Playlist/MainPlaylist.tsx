@@ -3,15 +3,21 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 const userIcon = require('../../assets/icons/user-icon.png');
 const homeIcon = require('../../assets/icons/home-icon.png');
 
-const MainPlaylist = (props: any) => {
+interface MainPlaylistProps {
+    name: string;
+    songs: string[];
+    date: string;
+}
+
+const MainPlaylist = (props: MainPlaylistProps) => {
     return (
         <View style={styles.playlist}>
             <Image style={styles.playlistImage} source={homeIcon} />
             <View>
-                <Text style={styles.header}>Titulo</Text>
+                <Text style={styles.header}>{props.name}</Text>
                 <Text style={styles.secondaryText}>Criado por Usuário</Text>
-                <Text style={styles.privacy}>Público / 10 faixas</Text>
-                <Text style={styles.secondaryText}>Publicado em 10/10/2010</Text>
+                <Text style={styles.privacy}>Público / {props.songs.length} faixas</Text>
+                <Text style={styles.secondaryText}>Publicado em {props.date}</Text>
             </View>
             <Pressable>
                 <Image style={styles.userImage} source={userIcon} />
@@ -27,7 +33,8 @@ const styles = StyleSheet.create({
         padding: 7,
         height: 83,
         backgroundColor: '#50037E',
-        borderRadius: 5
+        borderRadius: 5,
+        marginBottom: 11, 
     },
     header: {
         fontSize: 18,

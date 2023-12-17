@@ -7,6 +7,7 @@ import { useAuthContext } from './src/hooks/useAuthContext';
 const Stack = createNativeStackNavigator();
 import { Home } from './src/pages/Home';
 import { MyProfile } from './src/pages/MyProfile';
+import InitialPage from './src/pages/InitialPage';
 
 export default function App() {
 
@@ -17,7 +18,7 @@ export default function App() {
     <AuthContextProvider>
     <NavigationContainer>
           <Stack.Navigator initialRouteName={user ? 'Home': 'Login'}>
-        <Stack.Screen name="Home" component={MyProfile} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
     </AuthContextProvider>

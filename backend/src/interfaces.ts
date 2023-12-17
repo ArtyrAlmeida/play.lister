@@ -17,9 +17,10 @@ interface PlaylistInterface {
 
 interface UserInterface {
     _id?: string,
+    name: string,
     email: string,
     password: string,
-    songs?: string[],
+    playlists?: string[],
 }
 
 interface LoginInfo {

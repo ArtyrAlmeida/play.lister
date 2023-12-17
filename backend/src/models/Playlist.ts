@@ -13,20 +13,16 @@ const plalistSchema = new Schema<PlaylistInterface>({
         type: String,
         required: true
     },
-    created_at: {
-        type: String,
-        required: true
-    },
     author: {
         type: String,
         required: true
     },
     songs: {
-        type: [Song],
+        type: [String],
         required: true,
     }
-});
+}, { timestamps: true });
 
-const Plalist = mongoose.model("songs", plalistSchema);
+const Plalist = mongoose.model("playlists", plalistSchema);
 
 export default Plalist;

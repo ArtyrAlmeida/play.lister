@@ -5,8 +5,17 @@ interface UserInterface {
     songs?: string[],
 }
 
+interface PlaylistInterface {
+    _id?: string,
+    name: string,
+    description: string,
+    createdAt: string,
+    author: string,
+    songs: string[]
+}
+
 interface InputCamps {
     label: string
 }
 
-export { UserInterface, InputCamps }
+export { UserInterface, InputCamps, PlaylistInterface }

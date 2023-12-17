@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <View style={styles.container}>
             <Header />
-              <PlaylistDetail />
+              <InitialPage />
             <Footer />
         </View>
     )

@@ -1,9 +1,9 @@
-import songservice from '../services/SongService';
+import SongService from '../services/SongService';
 import RequestError from '../exceptions/RequestError';
 import { Request, Response } from 'express';
 
 export default class SongController {
-    private service = new songservice();
+    private service = new SongService();
     
     create = async (req: Request, res: Response) => {
         const song = req.body;

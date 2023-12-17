@@ -23,4 +23,4 @@ playlistRouter.get('/', playlistController.find);
 playlistRouter.get('/:id', playlistController.findOne);
 playlistRouter.post('/', playlistController.create);
 
-export { playlistRouter, userRouter };
+export { playlistRouter, userRouter, songsRouter };
