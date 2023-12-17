@@ -9,7 +9,6 @@ const loginUser = async (user:UserInterface) => {
         },
         body: JSON.stringify(user)
     });
-    console.log(response)
     if(response.ok) {
         const json = response.json();
         return json;

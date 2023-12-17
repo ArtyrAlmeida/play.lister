@@ -9,14 +9,14 @@ import { useState } from "react";
 import { registerUser } from "../../api/register";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const RegisterForm = () => {
+const RegisterForm = ({navigation}: any) => {
     const { control, handleSubmit, formState:{errors} } = useForm<IRegisterUser>({resolver: zodResolver(registerSchema)})
     const [loginError, setLoginError] = useState<any>({error: false, message: ''})
     const { dispatch } = useAuthContext();
 
     const handleUserLogin = async (data:any) => {
-      const response = await registerUser(data);
-      if(response){
+      const response = JSON.stringify(await registerUser(data));
+      if(!response){
         setLoginError((err: any) => {
           let newError = err;
           newError['error'] = true;
@@ -26,8 +26,9 @@ const RegisterForm = () => {
         })
       }
 
-      AsyncStorage.setItem("@user", response);
-      dispatch({type: "LOGIN", payload: response});  
+      await AsyncStorage.setItem("@user", response);
+      dispatch({type: "LOGIN", payload: response}); 
+      navigation.navigate('Home') 
     }
 
     return(

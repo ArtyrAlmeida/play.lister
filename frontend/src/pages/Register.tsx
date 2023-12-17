@@ -2,13 +2,13 @@ import { View, StyleSheet, ImageBackground } from "react-native"
 import { RegisterForm } from "../components/Form/RegisterForm";
 import bg from "../assets/images/Loginpagebg.png";
 
-const Register = () => 
+const Register = ({navigation}:any) => 
 {
     return(
         <>
         <ImageBackground source={bg} resizeMode="cover" style={styles.backgroundImage}>
             <View style={styles.container}>
-                <RegisterForm/>
+                <RegisterForm navigation={navigation}/>
             </View>
         </ImageBackground>
         </>

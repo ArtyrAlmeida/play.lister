@@ -12,12 +12,9 @@ import PlaylistDetail from './src/pages/PlaylistDetail';
 
 export default function App() {
 
-  //const { user } = useAuthContext();
-  const user = "User"
+  const { user } = useAuthContext();
   return (
     <AuthContextProvider>
-     
-
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={user ? 'Home': 'Login'}>
             <Stack.Screen name="Login" component={Login} />

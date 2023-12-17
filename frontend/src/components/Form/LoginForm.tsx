@@ -15,7 +15,7 @@ const LoginForm = ({navigation}:any) => {
     const { dispatch } = useAuthContext();
 
     const handleUserLogin = async (data:any) => {
-        const response = await loginUser(data);
+        const response = JSON.stringify(await loginUser(data));
         if(!response){
           setLoginError((err: any) => {
             let newError = err;
@@ -26,8 +26,9 @@ const LoginForm = ({navigation}:any) => {
           })
         }
 
-        AsyncStorage.setItem("@user", response);
+        await AsyncStorage.setItem("@user", response);
         dispatch({type: "LOGIN", payload: response});  
+        navigation.navigate('Home')
     }
 
     return(
