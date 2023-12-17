@@ -4,25 +4,29 @@ const userIcon = require('../../assets/icons/user-icon.png');
 const homeIcon = require('../../assets/icons/home-icon.png');
 
 interface MainPlaylistProps {
+    id: string;
     name: string;
     songs: string[];
     date: string;
+    onPlaylistPress: (id: string, name: string, date: string) => void;
 }
 
 const MainPlaylist = (props: MainPlaylistProps) => {
     return (
-        <View style={styles.playlist}>
-            <Image style={styles.playlistImage} source={homeIcon} />
-            <View>
-                <Text style={styles.header}>{props.name}</Text>
-                <Text style={styles.secondaryText}>Criado por Usuário</Text>
-                <Text style={styles.privacy}>Público / {props.songs.length} faixas</Text>
-                <Text style={styles.secondaryText}>Publicado em {props.date}</Text>
+        <Pressable onPress={() => props.onPlaylistPress(props.id, props.name, props.date)}>
+            <View style={styles.playlist}>
+                <Image style={styles.playlistImage} source={homeIcon} />
+                <View>
+                    <Text style={styles.header}>{props.name}</Text>
+                    <Text style={styles.secondaryText}>Criado por Usuário</Text>
+                    <Text style={styles.privacy}>Público / {props.songs.length} faixas</Text>
+                    <Text style={styles.secondaryText}>Publicado em {props.date}</Text>
+                </View>
+                <Pressable>
+                    <Image style={styles.userImage} source={userIcon} />
+                </Pressable>
             </View>
-            <Pressable>
-                <Image style={styles.userImage} source={userIcon} />
-            </Pressable>
-        </View>
+        </Pressable>
     )
 }
 
@@ -34,7 +38,7 @@ const styles = StyleSheet.create({
         height: 83,
         backgroundColor: '#50037E',
         borderRadius: 5,
-        marginBottom: 11, 
+        marginBottom: 11,
     },
     header: {
         fontSize: 18,

@@ -1,18 +1,37 @@
-import { Image, View, Text, StyleSheet } from "react-native";
+import { Image, View, Text, StyleSheet, Pressable } from "react-native";
 import Song from "../components/Song/Song";
+import { useEffect, useState } from "react";
+import { fetchPlaylistSongs } from "../api/fetchPlaylistSongs";
+import { SongInterface } from "../../interfaces";
 
 const homeIcon = require('../assets/icons/home-icon.png');
 
-const PlaylistDetail = (props: any) => {
+const PlaylistDetail = ({ navigation, route }: any) => {
+    const { id, name, date } = route.params;
+    const [songs, setSongs] = useState<SongInterface | []>([])
+
+    useEffect(() => {
+        fetchSongs()
+    }, []);
+
+    const fetchSongs = async () => {
+        const playlistSongs = await fetchPlaylistSongs(id);
+        console.log(playlistSongs);
+        
+        setSongs(playlistSongs);
+        
+    }
     return (
         <View style={styles.pageWrapper}>
             <View style={styles.playlistInfo} >
                 <Image style={styles.playlistImage} source={homeIcon}/>
-                <Text style={styles.title}>Playlist</Text>
-                <Text style={styles.date}>10/15/2023</Text>
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.date}>{date}</Text>
             </View>
             <View style={styles.songList}>
-                <Song />
+                <Pressable onPress={() => console.log(songs)}>
+                    <Song />
+                    </Pressable>
                 <Song />
                 <Song />
                 <Song />

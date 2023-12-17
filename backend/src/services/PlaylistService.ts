@@ -2,6 +2,7 @@ import { PlaylistInterface } from '../interfaces';
 import PlaylistValidator from '../validators/PlaylistValidator';
 import RequestError from '../exceptions/RequestError';
 import PlaylistRepository from '../repository/PlaylistRepository';
+import SongRepository from '../repository/SongRepository';
 
 export default class playlistservice {
     private repository = new PlaylistRepository();
@@ -30,6 +31,15 @@ export default class playlistservice {
             throw new RequestError('O id provido é inválido', 400);
         }
         const response = await this.repository.findOne(id);
+
+        return response;
+    };
+
+    findSongs = async (id: string) => {
+        if (!PlaylistValidator.isValidId(id)) {
+            throw new RequestError('O id provido é inválido', 400);
+        }
+        const response = await this.repository.findSongs(id);
 
         return response;
     };

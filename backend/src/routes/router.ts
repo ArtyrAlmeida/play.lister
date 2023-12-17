@@ -9,6 +9,7 @@ const songController = new SongController();
 
 songsRouter.get('/', songController.find);
 songsRouter.get('/:id', songController.findOne);
+songsRouter.post('/', songController.create);
 
 const userRouter = Router();
 const userController = new UserController();
@@ -21,6 +22,7 @@ const playlistController = new PlaylistController();
 
 playlistRouter.get('/', playlistController.find);
 playlistRouter.get('/:id', playlistController.findOne);
+playlistRouter.get('/songs/:id', playlistController.findSongs);
 playlistRouter.post('/', playlistController.create);
 playlistRouter.delete('/:id', playlistController.deleteOne);
 

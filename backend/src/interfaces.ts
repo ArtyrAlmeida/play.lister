@@ -1,7 +1,7 @@
 interface SongInterface {
     _id?: string,
     name: string,
-    launchDate: Date,
+    launchDate: string,
     description: string,
     author: string,
 }

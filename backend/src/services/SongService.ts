@@ -8,10 +8,10 @@ export default class songservice {
 
     create = async (song: SongInterface) => {
         if (!SongValidator.hasAllProperties(song)) {
-            throw new RequestError('O songo não possui todas as informações necessárias', 400);
+            throw new RequestError('A música não possui todas as informações necessárias', 400);
         }
         if(await SongValidator.songAlreadyExists(song)) {
-            throw new RequestError('Esse songo já existe', 422);
+            throw new RequestError('Essa música já existe', 422);
         }
 
         const response = await this.repository.create(song);

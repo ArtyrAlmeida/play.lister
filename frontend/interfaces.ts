@@ -6,6 +6,14 @@ interface UserInterface {
     playlists?: string[],
 }
 
+interface SongInterface {
+    _id?: string,
+    name: string,
+    launchDate: string,
+    description: string,
+    author: string,
+}
+
 interface PlaylistInterface {
     _id?: string,
     name: string,
@@ -25,4 +33,4 @@ interface InputCamps {
     label: string
 }
 
-export { UserInterface, InputCamps, PlaylistInterface, Error }
+export { UserInterface, InputCamps, PlaylistInterface, SongInterface, Error }

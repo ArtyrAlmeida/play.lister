@@ -13,7 +13,7 @@ const songSchema = new Schema<SongInterface>({
         required: true
     },
     launchDate: {
-        type: Date,
+        type: String,
         required: true
     },
     author: {

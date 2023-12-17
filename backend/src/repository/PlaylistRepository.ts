@@ -1,5 +1,6 @@
 import { PlaylistInterface } from '../interfaces';
 import Playlist from '../models/Playlist';
+import Song from '../models/Song';
 
 export default class PlaylistRepository {
     async create(playlist: PlaylistInterface) {
@@ -16,6 +17,13 @@ export default class PlaylistRepository {
 
     async findOne(id: string) {
         const result = await Playlist.findOne({ _id: id });
+        
+        return result;
+    }
+    
+    async findSongs(id: string) {
+        const playlist = await this.findOne(id);
+        const result = await Song.find({ _id: { $in: playlist?.songs } });
         
         return result;
     }
