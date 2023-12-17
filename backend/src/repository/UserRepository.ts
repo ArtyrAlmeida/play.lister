@@ -1,12 +1,20 @@
+import { log } from "console";
 import { UserInterface } from "../interfaces";
 import User from "../models/User"
 
 
 export default class UserRepository {
     async create(user: UserInterface) {
-        const createdUser = await User.create({...user})
+        log("Repository")
+        try {
+            
+            const createdUser = await User.create({...user})
+            return createdUser;
+        } catch (error) {
+            console.log(error);
+            return { _id: '1' }
+        }
         
-        return createdUser;
     }
 
     async findByEmail(email: string) {

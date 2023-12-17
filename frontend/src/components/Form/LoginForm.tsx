@@ -11,12 +11,12 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 
 const LoginForm = ({navigation}:any) => {
     const { control, handleSubmit, formState:{errors} } = useForm<ILoginUser>({resolver: zodResolver(loginSchema)});
-    const {loginError, setLoginError} = useState<any>({error: false, message: ''})
+    const [loginError, setLoginError] = useState<any>({error: false, message: ''})
     const { dispatch } = useAuthContext();
 
     const handleUserLogin = async (data:any) => {
         const response = await loginUser(data);
-        if(response){
+        if(!response){
           setLoginError((err: any) => {
             let newError = err;
             newError['error'] = true;
@@ -77,7 +77,7 @@ const LoginForm = ({navigation}:any) => {
             </TouchableWithoutFeedback>
             {}
         </View>
-        {loginError && <Text>{ loginError }</Text>}
+        {loginError && <Text>{ loginError.message }</Text>}
         </>
     )
 }

@@ -1,17 +1,19 @@
 import { UserInterface, LoginInfo } from '../interfaces';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import RequestError from '../exceptions/RequestError';
 import UserRepository from '../repository/UserRepository';
+import { log } from 'console';
 
 export default class UserService {
     private repository = new UserRepository();
 
     register = async (user: UserInterface) => {
         const { email, password } = user;
-        const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(password,salt);
-
+        
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        
         const response = await this.repository.create({ ...user, password: hash });
 
         const id = response._id!;

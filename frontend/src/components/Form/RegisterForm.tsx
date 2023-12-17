@@ -11,7 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const RegisterForm = () => {
     const { control, handleSubmit, formState:{errors} } = useForm<IRegisterUser>({resolver: zodResolver(registerSchema)})
-    const {loginError, setLoginError} = useState<any>({error: false, message: ''})
+    const [loginError, setLoginError] = useState<any>({error: false, message: ''})
     const { dispatch } = useAuthContext();
 
     const handleUserLogin = async (data:any) => {
@@ -101,7 +101,7 @@ const RegisterForm = () => {
                 </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
         </View>
-        {loginError && <Text>{ loginError }</Text>}
+        {loginError && <Text>{ loginError.message }</Text>}
       </>
     )
 }

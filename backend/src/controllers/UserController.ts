@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import RequestError from '../exceptions/RequestError';
 import UserService from '../services/UserService';
+import { log } from 'console';
 
 export class UserController {
     private service = new UserService();
     
     register = async (req: Request, res: Response) => {
+        log("Register")
         const user = req.body;
         try {
             const response = await this.service.register(user);

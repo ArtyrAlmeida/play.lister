@@ -1,7 +1,7 @@
 import { UserInterface } from "../../interfaces";
 import host from "./host";
 
-const registerUser = async (user: UserInterface) => {
+const registerUser = async (user: any) => {
     console.log(user)
     const response = await fetch(`${host}/user/register`, {
         method: 'POST',
