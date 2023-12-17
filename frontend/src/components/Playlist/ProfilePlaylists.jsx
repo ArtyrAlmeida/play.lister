@@ -27,7 +27,7 @@ const ProfilePlaylists = ({songs}) => {
             <TouchableOpacity key={songs[8]._id} onPress={hadlePlaylistSelection}>
                 <Text style={styles.playlistCape}>Ver mais</Text>
             </TouchableOpacity> :
-            <></>
+            null
             }
         </View>
     )

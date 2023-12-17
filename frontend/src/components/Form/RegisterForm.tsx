@@ -27,6 +27,7 @@ const RegisterForm = ({navigation}: any) => {
       }
 
       await AsyncStorage.setItem("@user", response);
+      
       dispatch({type: "LOGIN", payload: response}); 
       navigation.navigate('Home') 
     }

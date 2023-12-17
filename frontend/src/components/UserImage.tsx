@@ -6,7 +6,7 @@ const UserImage = (props: any) => {
     return (
         <View style={styles.userWrapper}>
             <Image source={userIcon} style={styles.userImage} />
-            <Text style={styles.heading}>User Name</Text>
+            <Text style={styles.heading}>{props.userName}</Text>
         </View>
     )
 }

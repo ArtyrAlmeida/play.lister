@@ -4,16 +4,16 @@ const userIcon = require('../assets/icons/user-icon.png');
 const homeIcon = require('../assets/icons/home-icon.png');
 const notebookIcon = require('../assets/icons/notebook-icon.png');
 
-const Footer = (props: any) => {
+const Footer = ({navigation}: any) => {
     return (
         <View style={styles.footer}>
-            <Pressable>
+            <Pressable onPress={() => {navigation.navigate("MyProfile")}}>
                 <Image source={userIcon} />
             </Pressable>
-            <Pressable>
+            <Pressable onPress={() => {navigation.navigate("Home")}}>
                 <Image source={homeIcon} />
             </Pressable>
-            <Pressable>
+            <Pressable onPress={() => {navigation.navigate("CreatePlaylist")}}>
                 <Image source={notebookIcon} />
             </Pressable>
         </View>

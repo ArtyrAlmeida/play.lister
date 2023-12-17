@@ -1,14 +1,14 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 const userIcon = require('../assets/icons/user-icon.png');
-
+''
 const Header = (props: any) => {
     return (
         <View style={styles.header}>
-            <View style={styles.userInfo}>
-                <Text style={styles.userName}>UserName</Text>
+            <TouchableOpacity style={styles.userInfo} onPress={() => {props.navigation.navigate("MyProfile")}}>
+                <Text style={styles.userName}>{props.userName}</Text>
                 <Image source={userIcon}  style={styles.userImage}/>
-            </View>
+            </TouchableOpacity>
         </View>
     )
 }

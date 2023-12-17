@@ -4,11 +4,13 @@ import UserImage from "../components/UserImage";
 
 
 const OtherUserProfile = (props: any) => {
+    //findUserById no outro user -> return de name > userImage userName={result && result.name}
+
     return (
         <View style={styles.pageWrapper}>
             <UserImage />
             <View style={styles.playlistList}>
-                <Text style={styles.heading}>Últimas Postagens</Text>
+                <Text style={styles.heading}>{props.userName}</Text>
                 <YourPlaylist />
                 <YourPlaylist />
                 <YourPlaylist />

@@ -9,10 +9,13 @@ import { Login } from './src/pages/Login';
 import { Register } from './src/pages/Register';
 import InitialPage from './src/pages/InitialPage';
 import PlaylistDetail from './src/pages/PlaylistDetail';
+import { MyProfile } from './src/pages/MyProfile';
+import { AddOrEditPlaylist } from './src/pages/AddOrEditPlaylist';
 
 export default function App() {
 
   const { user } = useAuthContext();
+  //const user = {}
   return (
     <AuthContextProvider>
         <NavigationContainer>
@@ -21,6 +24,8 @@ export default function App() {
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Home" component={InitialPage} />
             <Stack.Screen name='PlaylistDetail' component={PlaylistDetail} />
+            <Stack.Screen name='MyProfile' component={MyProfile} />
+            <Stack.Screen name='CreatePlaylist' component={AddOrEditPlaylist} />
 
           </Stack.Navigator>
         </NavigationContainer>
