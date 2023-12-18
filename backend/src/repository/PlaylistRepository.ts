@@ -28,6 +28,13 @@ export default class PlaylistRepository {
         return result;
     }
 
+    async findByUser(id: string) {
+        const playlist = await this.findOne(id);
+        const result = await Playlist.find({ author: id });
+        
+        return result;
+    }
+
     async updateOne(id: string, payload: object) {
         const result = await Playlist.updateOne({ _id: id }, { $set: payload });
 

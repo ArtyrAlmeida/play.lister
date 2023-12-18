@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 18,
         paddingTop: 29,
         width: '100%',
+        backgroundColor: "#131112",
     },
     playlistList: {
         gap: 11

@@ -56,6 +56,15 @@ export default class playlistservice {
         return response;
     };
 
+    findByUser = async (id: string) => {
+        if (!PlaylistValidator.isValidId(id)) {
+            throw new RequestError('O id provido é inválido', 400);
+        }
+        const response = await this.repository.findByUser(id);
+
+        return response;
+    };
+
     updateOne = async (id: string, payload: object) => {
         if (!PlaylistValidator.isValidId(id)) {
             throw new RequestError('O id provido é inválido', 400);
