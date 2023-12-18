@@ -25,7 +25,6 @@ const LoginForm = ({navigation}:any) => {
             return newError
           })
         }
-        console.log("USER LOGIN:", response)
         await AsyncStorage.setItem("@user", response);
         dispatch({type: "LOGIN", payload: response});  
         navigation.navigate('Home')

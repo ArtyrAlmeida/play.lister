@@ -1,9 +1,8 @@
 import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native"
 
-const ProfilePlaylists = ({songs, navigation}:any) => {
-
-    const hadlePlaylistSelection = ({_id}: any) => {
-        navigation.navigate("EditPlaylist", { _id })
+const ProfilePlaylists = ({playlists, navigation}:any) => {
+    const hadlePlaylistSelection = (id: any) => {
+        navigation.navigate("EditPlaylist", { id })
     }
 
     const handleViewMore = () => {
@@ -12,23 +11,23 @@ const ProfilePlaylists = ({songs, navigation}:any) => {
 
     return(
         <View style={styles.playlistsWrapper}>
-            {songs.length >= 9 ? 
-            songs.slice(0,8).map((song:any) => {
+            {playlists.length >= 9 ? 
+            playlists.slice(0,8).map((playlist:any) => {
                 return(
-                    <TouchableOpacity key={song._id} onPress={() => {hadlePlaylistSelection(song._id)}}>
-                        <Image source={{uri: song.image}} style={styles.playlistCape}/>
+                    <TouchableOpacity key={playlist._id} onPress={() => {hadlePlaylistSelection(playlist._id)}}>
+                        <Image source={{uri: playlist.image}} style={styles.playlistCape}/>
                     </TouchableOpacity>
                 )
             }) : 
-            songs.map((song:any) => {
+            playlists.map((playlist:any) => {
                 return(
-                    <TouchableOpacity key={song._id} onPress={() => {hadlePlaylistSelection(song._id)}}>
-                        <Image source={{uri: song.image}} style={styles.playlistCape}/>
+                    <TouchableOpacity key={playlist._id} onPress={() => {hadlePlaylistSelection(playlist._id)}}>
+                        <Image source={{uri: playlist.image}} style={styles.playlistCape}/>
                     </TouchableOpacity>
                 )
             })}
-            {songs.length >= 9 ? 
-            <TouchableOpacity key={songs[8]._id} onPress={handleViewMore}>
+            {playlists.length >= 9 ? 
+            <TouchableOpacity key={playlists[8]._id} onPress={handleViewMore}>
                 <Text style={styles.playlistCape}>Ver mais</Text>
             </TouchableOpacity> :
             null

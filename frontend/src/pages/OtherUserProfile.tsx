@@ -44,7 +44,7 @@ const OtherUserProfile = (props: any) => {
                     <FlatList
                         keyExtractor={item => item._id as string} 
                         data={playlists}
-                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} image={item.image} songs={item.songs} date={item.createdAt} id={item._id as string} author={item.author} />}
+                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} image={item.image} songs={item.songs} date={item.createdAt!} id={item._id as string} author={item.author} />}
                     />
                 </View>
             </View>

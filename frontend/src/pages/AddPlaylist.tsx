@@ -8,6 +8,9 @@ import Song from "../components/Song/Song";
 import { InputCamp } from "../components/Input/Input";
 import { PlaylistPrivacy } from "../components/Privacy/PlaylistPrivacy";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { PlaylistInterface } from "../../interfaces";
+import { createPlaylists } from "../api/createPlaylist";
+import { addSong } from "../api/addSong";
 
 const homeIcon = require('../assets/icons/home-icon.png');
 
@@ -20,9 +23,21 @@ const AddPlaylist = ({navigation, route}:any) => {
     const [songs, setSongs] = useState<any>([])
     const [playlistName, setPlaylistName] = useState<string>("")
     const [playlistPrivacy, setPlaylistPrivacy] = useState<boolean>(false)
+    const [playlistImage, setPlaylistImage] = useState<string>('');
 
-    const handleAddPlaylist = () => {
-      if(playlistName.length == 0 || songs.length == 0){
+    const handleAddPlaylist = async () => {
+      const songsIds = songs.map((song:any) => {return song._id})
+      if(playlistName.length !== 0 || songs.length !== 0){
+        const playlistData: PlaylistInterface = {
+          author: user.id,
+          name: playlistName,
+          description: `is private: ${playlistPrivacy}`,
+          songs: songsIds,
+          image: playlistImage,
+        }
+
+        await createPlaylists(playlistData)
+      }else{
         return
       }
     }
@@ -32,19 +47,23 @@ const AddPlaylist = ({navigation, route}:any) => {
     }
 
     const handleTitleChange = (title: string) => {
-      console.log(title)
       setPlaylistName(title)
+    }
+
+    const handleImageChange = (image: string) => {
+      setPlaylistImage(image)
     }
 
     const handleActivateModal = (data:any) => {
       setIsActive(true)
     }
 
-    const addSongToPlaylist = (data:any) => {
+    const addSongToPlaylist = async (data:any) => {
       setIsActive(false)
+      const response = await addSong(data);
       setSongs((songsArr:any) => {
         let newSongs = [...songsArr]
-        return [...newSongs, data]
+        return [...newSongs, response]
       })
     }
 
@@ -61,6 +80,10 @@ const AddPlaylist = ({navigation, route}:any) => {
                 placeholder="Título"
                 onChangeText={handleTitleChange}
                 value={playlistName}></InputCamp>
+                <InputCamp 
+                placeholder="Imagem"
+                onChangeText={handleImageChange}
+                value={playlistImage}></InputCamp>
           </View>
           <PlaylistPrivacy isPrivate={playlistPrivacy} onPress={handlePrivacyChange}></PlaylistPrivacy>
           <View style={styles.buttonWrapper}>
@@ -68,14 +91,14 @@ const AddPlaylist = ({navigation, route}:any) => {
                 <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Adicionar Musica" onPress={handleActivateModal}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => { setIsActive((state)=> { return !state })}}>
-                <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Criar Playlist" onPress={handleAddPlaylist}/>
+                <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Criar Playlist" onPress={()=>{handleAddPlaylist()}}/>
             </TouchableOpacity>
           </View>
           {songs && <FlatList
                         ItemSeparatorComponent={() => <View style={{height: 7}} />}
                         keyExtractor={(item) => item._id as string} 
                         data={songs}
-                        renderItem={({item, index}) => <Song titulo={item.titulo} album={item.album} genero={item.genero} artista={item.artista} id={item._id as string} key={index}/>}
+                        renderItem={({item, index}) => <Song name={item.name} length={item.length} author={item.author} description={item.description} id={item._id as string} key={item._id} imagem={item.image}/>}
           />}
         </View>
     )

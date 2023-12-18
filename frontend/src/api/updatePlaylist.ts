@@ -1,12 +1,13 @@
 import host from "./host";
 
-const fetchPlaylistSongs = async (id: string) => {
+const updatePlaylist = async (id:any, payload:any) => {
     try {
-        const response = await fetch(`${host}/playlist/songs/${id}`, {
-            method: 'GET',
+        const response = await fetch(`${host}/playlist/${id}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(payload)
         });
         if(response.ok) {
             const json = response.json();
@@ -19,4 +20,4 @@ const fetchPlaylistSongs = async (id: string) => {
     }
 };
 
-export {fetchPlaylistSongs}
+export {updatePlaylist}

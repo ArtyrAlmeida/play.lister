@@ -16,7 +16,6 @@ const YourPlaylists = (props: any) => {
         React.useCallback(() => {
             AsyncStorage.getItem("@user").then((user):any => {
                 const json = JSON.parse(user!);
-                console.log(json)
                 setUser(json);
                 updatePlaylists(json.id);
             }).catch((error) => {
@@ -44,7 +43,7 @@ const YourPlaylists = (props: any) => {
                         keyExtractor={item => item._id as string} 
                         data={playlists}
                         ItemSeparatorComponent={() => (<View style={styles.horizontalLine}></View>)}
-                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} image={item.image} songs={item.songs} date={item.createdAt} id={item._id as string} author={item.author} />}
+                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} image={item.image} songs={item.songs} date={item.createdAt!} id={item._id as string} author={item.author} />}
                         />
                 </View>
             </View>

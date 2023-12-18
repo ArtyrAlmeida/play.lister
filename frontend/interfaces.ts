@@ -20,7 +20,7 @@ interface PlaylistInterface {
     _id?: string,
     name: string,
     description: string,
-    createdAt: string,
+    createdAt?: string,
     author: string,
     songs: string[],
     image: string,

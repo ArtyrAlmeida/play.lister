@@ -8,11 +8,11 @@ const Song = (props: any) => {
         <View style={styles.song}>
             <Image style={styles.songImage} source={{uri: props.imagem as string}} />
             <View>
-                <Text style={styles.header}>{props.titulo}</Text>
-                <Text style={styles.secondaryText}>{props.artista}</Text>
-                <Text style={styles.additionalInfo}>{props.album}</Text>
+                <Text style={styles.header}>{props.name}</Text>
+                <Text style={styles.secondaryText}>{props.description}</Text>
+                <Text style={styles.additionalInfo}>{props.author}</Text>
             </View>
-            <Text style={styles.songLength}>{props.duracao}</Text>
+            <Text style={styles.songLength}>{props.length}</Text>
         </View>
     )
 }

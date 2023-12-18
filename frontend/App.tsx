@@ -10,9 +10,10 @@ import { Register } from './src/pages/Register';
 import InitialPage from './src/pages/InitialPage';
 import PlaylistDetail from './src/pages/PlaylistDetail';
 import { MyProfile } from './src/pages/MyProfile';
-import { AddOrEditPlaylist } from './src/pages/AddOrEditPlaylist';
 import OtherUserProfile from './src/pages/OtherUserProfile';
 import YourPlaylists from './src/pages/YourPlaylists';
+import { AddPlaylist } from './src/pages/AddPlaylist';
+import { EditPlaylist } from './src/pages/EditPlaylist';
 
 export default function App() {
 
@@ -28,7 +29,8 @@ export default function App() {
             <Stack.Screen name='PlaylistDetail' component={PlaylistDetail} />
             <Stack.Screen name='OtherUserProfile' component={OtherUserProfile} />
             <Stack.Screen name='MyProfile' component={MyProfile} />
-            <Stack.Screen name='CreatePlaylist' component={AddOrEditPlaylist} />
+            <Stack.Screen name='CreatePlaylist' component={AddPlaylist} />
+            <Stack.Screen name='EditPlaylist' component={EditPlaylist} />
             <Stack.Screen name='YourPlaylist' component={YourPlaylists} />
           </Stack.Navigator>
         </NavigationContainer>

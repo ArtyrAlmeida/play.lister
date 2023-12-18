@@ -18,7 +18,6 @@ const PlaylistDetail = ({ navigation, route }: any) => {
 
     const fetchSongs = async () => {
         const playlistSongs = await fetchPlaylistSongs(id);
-        console.log(playlistSongs);
 
         setSongs(playlistSongs);
     }
@@ -46,7 +45,7 @@ const PlaylistDetail = ({ navigation, route }: any) => {
                     <FlatList
                         keyExtractor={item => item._id as string}
                         data={songs}
-                        renderItem={({item}) => <Song titulo={item.name} album={item.description} duracao={item.length} artista={item.author} imagem={item.image} />}
+                        renderItem={({item}) => <Song name={item.name} description={item.description} length={item.length} author={item.author} imagem={item.image} />}
                         style={styles.songList}
 
                     />
