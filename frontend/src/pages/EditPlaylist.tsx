@@ -8,6 +8,11 @@ import Song from "../components/Song/Song";
 import { InputCamp } from "../components/Input/Input";
 import { PlaylistPrivacy } from "../components/Privacy/PlaylistPrivacy";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { fetchSpecificPlaylist } from "../api/fetchPlaylist";
+import { fetchPlaylistSongs } from "../api/fetchPlaylistSongs";
+import { updatePlaylist } from "../api/updatePlaylist";
+import { PlaylistInterface } from "../../interfaces";
+import { addSong } from "../api/addSong";
 
 const homeIcon = require('../assets/icons/home-icon.png');
 
@@ -19,24 +24,35 @@ const EditPlaylist = ({navigation, route}:any) => {
     const [isActive, setIsActive] = useState(false);
     const [songs, setSongs] = useState<any>([])
     const [playlistName, setPlaylistName] = useState<string>("")
+    const [playlistId, setPlaylistId] = useState<string>("")
     const [playlistPrivacy, setPlaylistPrivacy] = useState<boolean>(false)
 
-    const handleEditPlaylist = () => {
-      if(playlistName.length == 0 || songs.length == 0){
-        return
+    const handleEditPlaylist = async () => {
+    const songsIds = songs.map((song:any) => {return song._id})
+      if(playlistName.length !== 0 || songs.length !== 0){
+        const payload: PlaylistInterface = {
+            author: user.id,
+            name: playlistName,
+            description: `is private: ${playlistPrivacy}`,
+            songs: songsIds,
+        }
+        await updatePlaylist(playlistId, payload)
       }
     }
 
     useEffect(() => {
-        
-    })
+        fetchSpecificPlaylist(route.params.id).then((response) => {
+            setPlaylistName(response.name) 
+            setPlaylistId(route.params.id)}
+        )
+        fetchPlaylistSongs(route.params.id).then((response) => setSongs(response))
+    },[])
 
     const handlePrivacyChange = () => {
       setPlaylistPrivacy(privacy => !privacy)
     }
 
     const handleTitleChange = (title: string) => {
-      console.log(title)
       setPlaylistName(title)
     }
 
@@ -44,12 +60,13 @@ const EditPlaylist = ({navigation, route}:any) => {
       setIsActive(true)
     }
 
-    const addSongToPlaylist = (data:any) => {
-      setIsActive(false)
-      setSongs((songsArr:any) => {
-        let newSongs = [...songsArr]
-        return [...newSongs, data]
-      })
+    const addSongToPlaylist = async (data:any) => {
+        setIsActive(false)
+        const response = await addSong(data);
+        setSongs((songsArr:any) => {
+          let newSongs = [...songsArr]
+          return [...newSongs, response]
+        })
     }
 
     return(
@@ -79,7 +96,7 @@ const EditPlaylist = ({navigation, route}:any) => {
                         ItemSeparatorComponent={() => <View style={{height: 7}} />}
                         keyExtractor={(item) => item._id as string} 
                         data={songs}
-                        renderItem={({item, index}) => <Song titulo={item.titulo} album={item.album} genero={item.genero} artista={item.artista} id={item._id as string} key={index}/>}
+                        renderItem={({item, index}) => <Song name={item.name} length={item.length} author={item.author} description={item.description} id={item._id as string} key={item._id}/>}
           />}
         </View>
     )

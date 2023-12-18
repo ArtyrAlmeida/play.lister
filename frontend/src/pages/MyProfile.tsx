@@ -47,7 +47,7 @@ const MyProfile = ({navigation}:any) => {
                 <Map/>
             </View>
             <View style={styles.playlistWrapper}>
-                {(playlists && playlists.length > 0) ? <ProfilePlaylists songs={playlists} navigation={navigation}></ProfilePlaylists> : <Text style={styles.playlistText}>Ainda não existe nada aqui</Text>}
+                {(playlists && playlists.length > 0) ? <ProfilePlaylists playlists={playlists} navigation={navigation}></ProfilePlaylists> : <Text style={styles.playlistText}>Ainda não existe nada aqui</Text>}
             </View>
 
             <Button containerStyle={styles.overAllButton} textStyle={styles.loginButton} title="Sair" onPress={handleLogout} icon={loggout}/>

@@ -16,7 +16,6 @@ const InitialPage = ({navigation}: any) => {
         React.useCallback(() => {
             AsyncStorage.getItem("@user").then((user):any => {
                 const json = JSON.parse(user!);
-                console.log(json)
                 setUser(json);
                 updatePlaylists();
             }).catch((error) => {
@@ -35,7 +34,6 @@ const InitialPage = ({navigation}: any) => {
 
     const handleProfilePress = async (id: string) => {
         const user = await fetchUser(id);
-        console.log(user);
         
         navigation.navigate('OtherUserProfile', user)
     }
@@ -47,7 +45,7 @@ const InitialPage = ({navigation}: any) => {
                 <FlatList
                     keyExtractor={item => item._id as string} 
                     data={playlists}
-                    renderItem={({item}) => <MainPlaylist name={item.name} songs={item.songs} date={item.createdAt} onProfilePress={handleProfilePress} onPlaylistPress={handlePlaylistPress} id={item._id as string} author={item.author} />}
+                    renderItem={({item}) => <MainPlaylist name={item.name} songs={item.songs} date={item.createdAt!} onProfilePress={handleProfilePress} onPlaylistPress={handlePlaylistPress} id={item._id as string} author={item.author} />}
                 />
             </View>
             <Footer navigation={navigation}/>

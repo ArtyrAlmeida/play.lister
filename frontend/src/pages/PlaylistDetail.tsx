@@ -18,7 +18,6 @@ const PlaylistDetail = ({ navigation, route }: any) => {
 
     const fetchSongs = async () => {
         const playlistSongs = await fetchPlaylistSongs(id);
-        console.log(playlistSongs);
 
         setSongs(playlistSongs);
     }

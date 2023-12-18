@@ -11,7 +11,6 @@ const AddSongModal = ({handleSongAdition}:any) => {
     const { control, handleSubmit, formState:{errors} } = useForm<ISongSchema>({resolver: zodResolver(songSchema)});
 
     const handleAddSong = async (data:any) => {
-        console.log(data)
         handleSongAdition(data)
     }
 
@@ -22,7 +21,7 @@ const AddSongModal = ({handleSongAdition}:any) => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAvoidingView behavior="position" enabled>
                 <Controller
-                    name='titulo'
+                    name='name'
                     control={control}
                     render={({ field }) => (
                     <InputCamp
@@ -34,10 +33,40 @@ const AddSongModal = ({handleSongAdition}:any) => {
                   )}
                 />
                 {
-                  !!errors.titulo && <Text style={styles.errorMessage}>{errors.titulo.message}</Text>
+                  !!errors.name && <Text style={styles.errorMessage}>{errors.name.message}</Text>
                 }
                 <Controller
-                    name='artista'
+                    name='length'
+                    control={control}
+                    render={({ field }) => (
+                    <InputCamp
+                      label="Duracao"
+                      placeholder="Duracao"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                  )}
+                />
+                {
+                  !!errors.length && <Text style={styles.errorMessage}>{errors.length.message}</Text>
+                }
+                <Controller
+                    name='description'
+                    control={control}
+                    render={({ field }) => (
+                    <InputCamp
+                      label="Descricao"
+                      placeholder="Descricao"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                  )}
+                />
+                {
+                  !!errors.description && <Text style={styles.errorMessage}>{errors.description.message}</Text>
+                }
+                <Controller
+                    name='author'
                     control={control}
                     render={({ field }) => (
                     <InputCamp
@@ -49,37 +78,7 @@ const AddSongModal = ({handleSongAdition}:any) => {
                   )}
                 />
                 {
-                  !!errors.artista && <Text style={styles.errorMessage}>{errors.artista.message}</Text>
-                }
-                <Controller
-                    name='album'
-                    control={control}
-                    render={({ field }) => (
-                    <InputCamp
-                      label="Album"
-                      placeholder="Album"
-                      onChangeText={field.onChange}
-                      value={field.value}
-                    />
-                  )}
-                />
-                {
-                  !!errors.album && <Text style={styles.errorMessage}>{errors.album.message}</Text>
-                }
-                <Controller
-                    name='genero'
-                    control={control}
-                    render={({ field }) => (
-                    <InputCamp
-                      label="Genero"
-                      placeholder="Genero"
-                      onChangeText={field.onChange}
-                      value={field.value}
-                    />
-                  )}
-                />
-                {
-                  !!errors.genero && <Text style={styles.errorMessage}>{errors.genero.message}</Text>
+                  !!errors.author && <Text style={styles.errorMessage}>{errors.author.message}</Text>
                 }
                 <View style={styles.buttonContainer}>
                   <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Adicionar" onPress={handleSubmit(handleAddSong)}/>
