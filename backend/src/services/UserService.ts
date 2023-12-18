@@ -9,7 +9,7 @@ export default class UserService {
     private repository = new UserRepository();
 
     register = async (user: UserInterface) => {
-        const { email, password } = user;
+        const { name, email, password } = user;
         
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
@@ -20,7 +20,7 @@ export default class UserService {
 
         const token = await this.signToken(id);
 
-        return { email, token, id };
+        return { name, email, token, id };
     };
 
     login = async (user: LoginInfo) => {
@@ -33,9 +33,9 @@ export default class UserService {
         const match = await bcrypt.compare(user.password, dbUser.password);
 
         if(match) {
-            const { email, _id } = dbUser;
+            const { name, email, _id } = dbUser;
             const token = await this.signToken(dbUser._id!);
-            return { email, token, id: _id.toString()};
+            return { name, email, token, id: _id.toString()};
         }
         
         throw new RequestError('Credenciais erradas', 401);

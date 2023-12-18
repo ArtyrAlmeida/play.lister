@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native"
 
-const ProfilePlaylists = ({songs}) => {
+const ProfilePlaylists = ({songs}:any) => {
 
     const hadlePlaylistSelection = () => {
         return
@@ -9,14 +9,14 @@ const ProfilePlaylists = ({songs}) => {
     return(
         <View style={styles.playlistsWrapper}>
             {songs.length >= 9 ? 
-            songs.slice(0,8).map((song) => {
+            songs.slice(0,8).map((song:any) => {
                 return(
                     <TouchableOpacity key={song._id} onPress={hadlePlaylistSelection}>
                         <Image source={song.url} style={styles.playlistCape}/>
                     </TouchableOpacity>
                 )
             }) : 
-            songs.map((song) => {
+            songs.map((song:any) => {
                 return(
                     <TouchableOpacity key={song._id} onPress={hadlePlaylistSelection}>
                         <Image source={song.url} style={styles.playlistCape}/>

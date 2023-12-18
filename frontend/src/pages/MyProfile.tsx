@@ -6,12 +6,18 @@ import Footer from "../components/Footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
+const loggout = require("../assets/icons/loggout.png")
+
 const MyProfile = ({navigation}:any) => {
 
     const songs:any = [{url: "", _id: "1"},{url: "", _id: "2"},{url: "", _id: "3"},{url: "", _id: "4"},{url: "", _id: "5"},{url: "", _id: "6"},{url: "" , _id: "7"},{url: "" , _id: "8"},{url: "" , _id: "9"}];
 
     const handleLogout = () => {
-        return
+        AsyncStorage.setItem("@user", "").then(() => {
+            navigation.navigate("Login")
+        }).catch((error) => {
+            console.log(error)
+        })
     }
     const [user, setUser] = useState<any>();
     useEffect(() => {
@@ -29,11 +35,12 @@ const MyProfile = ({navigation}:any) => {
             <View>
                 <UserImage userName={user && user.name}/>
             </View>
+            <Text>Suas Playlists</Text>
             <View style={styles.playlistWrapper}>
                 {songs.length > 0 ? <ProfilePlaylists songs={songs}></ProfilePlaylists> : <Text>Ainda não existe nada aqui</Text>}
             </View>
 
-            <Button containerStyle={styles.overAllButton} textStyle={styles.loginButton} title="Sair" onPress={handleLogout}/>
+            <Button containerStyle={styles.overAllButton} textStyle={styles.loginButton} title="Sair" onPress={handleLogout} icon={loggout}/>
         </View>
         <Footer navigation={navigation}></Footer>
         </>
@@ -45,6 +52,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#131112",
         alignItems: "center",
+        textAlign: "left",
         gap: 20
     },
     playlistWrapper: {

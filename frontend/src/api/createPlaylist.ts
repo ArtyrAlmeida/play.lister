@@ -1,9 +1,9 @@
 import host from "./host";
 
-const fetchPlaylists = async () => {
+const fetchPlaylists = async (data:any) => {
     try {
         const response = await fetch(`${host}/playlist/`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             }
