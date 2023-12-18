@@ -20,6 +20,10 @@ const plalistSchema = new Schema<PlaylistInterface>({
     songs: {
         type: [String],
         required: true,
+    },
+    createdAt: {
+        type: Date,
+        required: true,
     }
 }, { timestamps: true });
 

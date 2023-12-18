@@ -6,6 +6,7 @@ import { PlaylistInterface } from "../../interfaces";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { fetchUser } from "../api/fetchUser";
 
 const InitialPage = ({navigation}: any) => {
     const [playlists, setPlaylists] = useState<PlaylistInterface[] | []>([]);
@@ -30,15 +31,20 @@ const InitialPage = ({navigation}: any) => {
         navigation.navigate('PlaylistDetail', { id, name, date });
     }
 
+    const handleProfilePress = async (id: string) => {
+        const user = await fetchUser(id);
+        navigation.navigate('OtherUserProfile', user)
+    }
+
     return (
         <>
             <Header userName={user && user.name} navigation={navigation}/>
             <View style={styles.pageWrapper}>
                 <FlatList
-                        keyExtractor={item => item._id as string} 
-                        data={playlists}
-                        renderItem={({item}) => <MainPlaylist name={item.name} songs={item.songs} date={item.createdAt} onPlaylistPress={handlePlaylistPress} id={item._id as string} />}
-                        />
+                    keyExtractor={item => item._id as string} 
+                    data={playlists}
+                    renderItem={({item}) => <MainPlaylist name={item.name} songs={item.songs} date={item.createdAt} onProfilePress={handleProfilePress} onPlaylistPress={handlePlaylistPress} id={item._id as string} author={item.author} />}
+                />
             </View>
             <Footer navigation={navigation}/>
         </>

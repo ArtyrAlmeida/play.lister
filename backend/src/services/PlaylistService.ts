@@ -3,6 +3,7 @@ import PlaylistValidator from '../validators/PlaylistValidator';
 import RequestError from '../exceptions/RequestError';
 import PlaylistRepository from '../repository/PlaylistRepository';
 import SongRepository from '../repository/SongRepository';
+import { log } from 'console';
 
 export default class playlistservice {
     private repository = new PlaylistRepository();
@@ -23,7 +24,18 @@ export default class playlistservice {
     find = async () => {
         const response = await this.repository.find();
 
-        return response;
+        log(response)
+
+        const formattedDates = response.map(playlist => {
+            const date = new Date(playlist.createdAt);
+            const day =  date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+            return { ...playlist.toObject(), createdAt: formattedDate };
+        })
+
+        return formattedDates;
     };
 
     findOne = async (id: string) => {

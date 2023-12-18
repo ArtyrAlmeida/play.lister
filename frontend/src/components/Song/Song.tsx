@@ -5,27 +5,27 @@ const homeIcon = require('../../assets/icons/home-icon.png');
 
 const Song = (props: any) => {
     return (
-        <View style={styles.playlist}>
-            <Image style={styles.playlistImage} source={homeIcon} />
+        <View style={styles.song}>
+            <Image style={styles.songImage} source={homeIcon} />
             <View>
                 <Text style={styles.header}>{props.titulo}</Text>
                 <Text style={styles.secondaryText}>{props.artista}</Text>
                 <Text style={styles.additionalInfo}>{props.album}</Text>
-                <Text style={styles.additionalInfo}>{props.genero}</Text>
             </View>
-            <Text style={styles.songLength}>05:40</Text>
+            <Text style={styles.songLength}>{props.duracao}</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    playlist: {
+    song: {
         flex: 0,
         flexDirection: 'row',
         padding: 7,
         height: 83,
         backgroundColor: '#50037E',
-        borderRadius: 5
+        borderRadius: 5,
+        marginBottom: 9
     },
     header: {
         fontSize: 18,
@@ -39,16 +39,16 @@ const styles = StyleSheet.create({
         fontSize: 10,
         color: '#ffffff'
     },
-    playlistImage: {
+    songImage: {
         height: 71,
         width: 71,
         backgroundColor: 'white',
         marginRight: 9
     },
     songLength: {
-        position: 'relative',
-        top: 58,
-        right: -148,
+        position: 'absolute',
+        bottom: 5,
+        right: 5,
         borderRadius: 100,
         fontSize: 10,
         color: '#ffffff'

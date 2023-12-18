@@ -41,6 +41,12 @@ export default class UserService {
         throw new RequestError('Credenciais erradas', 401);
     }
 
+    find = async (id: string) => {
+        const response = await this.repository.findById(id);
+
+        return response;
+    };
+
     signToken = async (id: string) => {
         return jwt.sign({id}, process.env.SECRET as string, {expiresIn: '3d'})
     }

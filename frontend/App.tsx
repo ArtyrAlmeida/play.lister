@@ -11,6 +11,7 @@ import InitialPage from './src/pages/InitialPage';
 import PlaylistDetail from './src/pages/PlaylistDetail';
 import { MyProfile } from './src/pages/MyProfile';
 import { AddOrEditPlaylist } from './src/pages/AddOrEditPlaylist';
+import OtherUserProfile from './src/pages/OtherUserProfile';
 
 export default function App() {
 
@@ -24,6 +25,7 @@ export default function App() {
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Home" component={InitialPage} />
             <Stack.Screen name='PlaylistDetail' component={PlaylistDetail} />
+            <Stack.Screen name='OtherUserProfile' component={OtherUserProfile} />
             <Stack.Screen name='MyProfile' component={MyProfile} />
             <Stack.Screen name='CreatePlaylist' component={AddOrEditPlaylist} />
 

@@ -12,7 +12,7 @@ const songSchema = new Schema<SongInterface>({
         type: String,
         required: true
     },
-    launchDate: {
+    length: {
         type: String,
         required: true
     },

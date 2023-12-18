@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { Map } from "../components/Map/Map";
+import Header from "../components/Header";
 
 const loggout = require("../assets/icons/loggout.png")
 
@@ -32,6 +33,7 @@ const MyProfile = ({navigation}:any) => {
 
     return(
         <>
+        <Header userName={user && user.name} navigation={navigation}/>
         <View style={styles.pageWrapper}>
             <View>
                 <UserImage userName={user && user.name}/>

@@ -8,7 +8,9 @@ interface MainPlaylistProps {
     name: string;
     songs: string[];
     date: string;
+    author: string;
     onPlaylistPress: (id: string, name: string, date: string) => void;
+    onProfilePress: (id: string) => void;
 }
 
 const MainPlaylist = (props: MainPlaylistProps) => {
@@ -22,7 +24,7 @@ const MainPlaylist = (props: MainPlaylistProps) => {
                     <Text style={styles.privacy}>Público / {props.songs.length} faixas</Text>
                     <Text style={styles.secondaryText}>Publicado em {props.date}</Text>
                 </View>
-                <Pressable>
+                <Pressable onPress={() => props.onProfilePress(props.author)}>
                     <Image style={styles.userImage} source={userIcon} />
                 </Pressable>
             </View>

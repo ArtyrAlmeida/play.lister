@@ -9,7 +9,7 @@ interface UserInterface {
 interface SongInterface {
     _id?: string,
     name: string,
-    launchDate: string,
+    length: string,
     description: string,
     author: string,
 }

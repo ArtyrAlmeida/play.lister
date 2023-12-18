@@ -1,14 +1,17 @@
-import { Image, View, Text, StyleSheet, Pressable } from "react-native";
+import { Image, View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import Song from "../components/Song/Song";
 import { useEffect, useState } from "react";
 import { fetchPlaylistSongs } from "../api/fetchPlaylistSongs";
 import { SongInterface } from "../../interfaces";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const homeIcon = require('../assets/icons/home-icon.png');
 
 const PlaylistDetail = ({ navigation, route }: any) => {
     const { id, name, date } = route.params;
-    const [songs, setSongs] = useState<SongInterface | []>([])
+    const [songs, setSongs] = useState<SongInterface[] | []>([])
 
     useEffect(() => {
         fetchSongs()
@@ -17,29 +20,41 @@ const PlaylistDetail = ({ navigation, route }: any) => {
     const fetchSongs = async () => {
         const playlistSongs = await fetchPlaylistSongs(id);
         console.log(playlistSongs);
-        
+
         setSongs(playlistSongs);
-        
     }
+
+    const [user, setUser] = useState<any>();
+    useEffect(() => {
+        AsyncStorage.getItem("@user").then((user): any => {
+            const json = JSON.parse(user!);
+            setUser(json);
+        }).catch((error) => {
+            console.log(error)
+        })
+    }, []);
+
     return (
-        <View style={styles.pageWrapper}>
-            <View style={styles.playlistInfo} >
-                <Image style={styles.playlistImage} source={homeIcon}/>
-                <Text style={styles.title}>{name}</Text>
-                <Text style={styles.date}>{date}</Text>
+        <>
+            <Header userName={user && user.name} navigation={navigation}/>
+            <View style={styles.pageWrapper}>
+                <View style={styles.playlistInfo} >
+                    <Image style={styles.playlistImage} source={homeIcon} />
+                    <Text style={styles.title}>{name}</Text>
+                    <Text style={styles.date}>{date}</Text>
+                </View>
+                <View>
+                    <FlatList
+                        keyExtractor={item => item._id as string}
+                        data={songs}
+                        renderItem={({item}) => <Song titulo={item.name} album={item.description} duracao={item.length} artista={item.author} />}
+                        style={styles.songList}
+
+                    />
+                </View>
             </View>
-            <View style={styles.songList}>
-                <Pressable onPress={() => console.log(songs)}>
-                    <Song />
-                    </Pressable>
-                <Song />
-                <Song />
-                <Song />
-                <Song />
-                <Song />
-                <Song />
-            </View>
-        </View>
+            <Footer navigation={navigation}></Footer>
+        </>
     )
 }
 
@@ -58,6 +73,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 18,
         paddingTop: 29,
         width: '100%',
+        backgroundColor: "#131112",
+        flex: 1
     },
     songList: {
         paddingHorizontal: 18,
@@ -65,7 +82,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D9D9',
         borderRadius: 20,
         minHeight: 460,
-        gap: 9
     },
     title: {
         fontSize: 12,
