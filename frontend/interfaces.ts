@@ -4,6 +4,7 @@ interface UserInterface {
     email: string,
     password: string,
     playlists?: string[],
+    image: string,
 }
 
 interface SongInterface {
@@ -12,6 +13,7 @@ interface SongInterface {
     length: string,
     description: string,
     author: string,
+    image: string,
 }
 
 interface PlaylistInterface {
@@ -20,7 +22,8 @@ interface PlaylistInterface {
     description: string,
     createdAt: string,
     author: string,
-    songs: string[]
+    songs: string[],
+    image: string,
 }
 
 interface Error {

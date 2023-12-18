@@ -15,6 +15,8 @@ const RegisterForm = ({navigation}: any) => {
     const { dispatch } = useAuthContext();
 
     const handleUserLogin = async (data:any) => {
+      console.log(data);
+      
       const response = JSON.stringify(await registerUser(data));
       if(!response){
         setLoginError((err: any) => {
@@ -96,6 +98,21 @@ const RegisterForm = ({navigation}: any) => {
                 />
                 {
                   !!errors.email && <Text style={styles.errorMessage}>{errors.email.message}</Text>
+                }
+                <Controller
+                    name='image'
+                    control={control}
+                    render={({ field }) => (
+                    <InputCamp
+                      label="Imagem de perfil"
+                      placeholder="Url da imagem de perfil"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                  )}
+                />
+                {
+                  !!errors.image && <Text style={styles.errorMessage}>{errors.image.message}</Text>
                 }
                 <View style={styles.buttonContainer}>
                   <Button containerStyle={styles.overAllButton} textStyle={styles.loginButton} title="registrar" onPress={handleSubmit(handleUserLogin)}/>

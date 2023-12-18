@@ -24,7 +24,7 @@ export default class UserRepository {
     }
 
     async findById(id: string) {
-        const result = await User.findById(id, { email: 1, name: 1 });
+        const result = await User.findById(id, { email: 1, name: 1, image: 1 });
 
         return result;
     }

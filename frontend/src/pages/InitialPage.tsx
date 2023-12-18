@@ -29,8 +29,8 @@ const InitialPage = ({navigation}: any) => {
         setPlaylists(playlists);
     }
 
-    const handlePlaylistPress = (id: string, name: string, date: string) => {
-        navigation.navigate('PlaylistDetail', { id, name, date });
+    const handlePlaylistPress = (id: string, name: string, date: string, image: string) => {
+        navigation.navigate('PlaylistDetail', { id, name, date, image });
     }
 
     const handleProfilePress = async (id: string) => {
@@ -42,12 +42,12 @@ const InitialPage = ({navigation}: any) => {
 
     return (
         <>
-            <Header userName={user && user.name} navigation={navigation}/>
+            <Header image={user && user.image} userName={user && user.name} navigation={navigation}/>
             <View style={styles.pageWrapper}>
                 <FlatList
                     keyExtractor={item => item._id as string} 
                     data={playlists}
-                    renderItem={({item}) => <MainPlaylist name={item.name} songs={item.songs} date={item.createdAt} onProfilePress={handleProfilePress} onPlaylistPress={handlePlaylistPress} id={item._id as string} author={item.author} />}
+                    renderItem={({item}) => <MainPlaylist image={item.image} name={item.name} songs={item.songs} date={item.createdAt} onProfilePress={handleProfilePress} onPlaylistPress={handlePlaylistPress} id={item._id as string} author={item.author} />}
                 />
             </View>
             <Footer navigation={navigation}/>

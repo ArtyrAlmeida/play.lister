@@ -7,7 +7,7 @@ const Header = (props: any) => {
         <View style={styles.header}>
             <TouchableOpacity style={styles.userInfo} onPress={() => {props.navigation.navigate("MyProfile")}}>
                 <Text style={styles.userName}>{props.userName}</Text>
-                <Image source={userIcon}  style={styles.userImage}/>
+                <Image source={{ uri: props.image as string }}  style={styles.userImage}/>
             </TouchableOpacity>
         </View>
     )

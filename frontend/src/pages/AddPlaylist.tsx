@@ -50,7 +50,7 @@ const AddPlaylist = ({navigation, route}:any) => {
 
     return(
         <View style={styles.page}>
-          <Header userName={user && user.name} navigation={navigation}/>
+          <Header image={user && user.image} userName={user && user.name} navigation={navigation}/>
           {isActive && 
           <View style={styles.modalWrapper}>
             <AddSongModal handleSongAdition={addSongToPlaylist}/>

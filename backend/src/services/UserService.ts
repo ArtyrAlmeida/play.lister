@@ -35,7 +35,7 @@ export default class UserService {
         if(match) {
             const { name, email, _id } = dbUser;
             const token = await this.signToken(dbUser._id!);
-            return { name, email, token, id: _id.toString()};
+            return { name, email, token, id: _id.toString(), image: dbUser.image};
         }
         
         throw new RequestError('Credenciais erradas', 401);

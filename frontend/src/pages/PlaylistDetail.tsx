@@ -12,7 +12,7 @@ import React from "react";
 const homeIcon = require('../assets/icons/home-icon.png');
 
 const PlaylistDetail = ({ navigation, route }: any) => {
-    const { id, name, date } = route.params;
+    const { id, name, date, image } = route.params;
     const [songs, setSongs] = useState<SongInterface[] | []>([])
     const [user, setUser] = useState<any>();
 
@@ -35,10 +35,10 @@ const PlaylistDetail = ({ navigation, route }: any) => {
 
     return (
         <>
-            <Header userName={user && user.name} navigation={navigation}/>
+            <Header image={user && user.image} userName={user && user.name} navigation={navigation}/>
             <View style={styles.pageWrapper}>
                 <View style={styles.playlistInfo} >
-                    <Image style={styles.playlistImage} source={homeIcon} />
+                    <Image style={styles.playlistImage} source={{ uri: image }} />
                     <Text style={styles.title}>{name}</Text>
                     <Text style={styles.date}>{date}</Text>
                 </View>
@@ -46,7 +46,7 @@ const PlaylistDetail = ({ navigation, route }: any) => {
                     <FlatList
                         keyExtractor={item => item._id as string}
                         data={songs}
-                        renderItem={({item}) => <Song titulo={item.name} album={item.description} duracao={item.length} artista={item.author} />}
+                        renderItem={({item}) => <Song titulo={item.name} album={item.description} duracao={item.length} artista={item.author} imagem={item.image} />}
                         style={styles.songList}
 
                     />

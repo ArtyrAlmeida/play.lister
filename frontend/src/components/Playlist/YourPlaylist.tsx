@@ -8,15 +8,16 @@ interface YourPlaylistProps {
     date: string;
     id: string;
     author: string;
-    onPlaylistPress: (id: string, name: string, date: string) => void;
+    image: string;
+    onPlaylistPress: (id: string, name: string, date: string, image: string) => void;
 }
 
 const YourPlaylist = (props: YourPlaylistProps) => {
     return (
-        <Pressable onPress={() => props.onPlaylistPress(props.id, props.name, props.date)}>
+        <Pressable onPress={() => props.onPlaylistPress(props.id, props.name, props.date, props.image)}>
             <View>
                 <View style={styles.playlist}>
-                    <Image style={styles.playlistImage} source={homeIcon} />
+                    <Image style={styles.playlistImage} source={{ uri: props.image }} />
                     <View>
                         <View style={styles.textArea}>
                             <Text style={styles.header}>{props.name}</Text>

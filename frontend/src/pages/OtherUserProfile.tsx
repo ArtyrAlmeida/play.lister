@@ -30,21 +30,21 @@ const OtherUserProfile = (props: any) => {
         setPlaylists(playlistResponse);
     } 
 
-    const handlePlaylistPress = (id: string, name: string, date: string) => {
-        props.navigation.navigate('PlaylistDetail', { id, name, date });
+    const handlePlaylistPress = (id: string, name: string, date: string, image: string) => {
+        props.navigation.navigate('PlaylistDetail', { id, name, date, image });
     }
 
     return (
         <>
-            <Header userName={user && user.name} navigation={props.navigation}/>
+            <Header image={user && user.image} userName={user && user.name} navigation={props.navigation}/>
             <View style={styles.pageWrapper}>
-                <UserImage />
+                <UserImage image={props.route.params.image} />
                 <View style={styles.playlistList}>
                     <Text style={styles.heading}>{props.route.params.name}</Text>
                     <FlatList
                         keyExtractor={item => item._id as string} 
                         data={playlists}
-                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} songs={item.songs} date={item.createdAt} id={item._id as string} author={item.author} />}
+                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} image={item.image} songs={item.songs} date={item.createdAt} id={item._id as string} author={item.author} />}
                     />
                 </View>
             </View>

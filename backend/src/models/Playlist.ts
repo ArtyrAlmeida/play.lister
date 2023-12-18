@@ -24,6 +24,10 @@ const plalistSchema = new Schema<PlaylistInterface>({
     createdAt: {
         type: Date,
         required: false,
+    },
+    image: {
+        type: String,
+        required: true,
     }
 }, { timestamps: true });
 

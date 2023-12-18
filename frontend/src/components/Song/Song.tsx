@@ -6,7 +6,7 @@ const homeIcon = require('../../assets/icons/home-icon.png');
 const Song = (props: any) => {
     return (
         <View style={styles.song}>
-            <Image style={styles.songImage} source={homeIcon} />
+            <Image style={styles.songImage} source={{uri: props.imagem as string}} />
             <View>
                 <Text style={styles.header}>{props.titulo}</Text>
                 <Text style={styles.secondaryText}>{props.artista}</Text>

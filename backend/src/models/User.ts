@@ -19,6 +19,10 @@ const userSchema = new Schema<UserInterface>({
     playlists: {
         type: [String],
         required: false
+    },
+    image: {
+        type: String,
+        required: true,
     }
 });
 

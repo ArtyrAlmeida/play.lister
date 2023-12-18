@@ -16,14 +16,14 @@ const ProfilePlaylists = ({songs, navigation}:any) => {
             songs.slice(0,8).map((song:any) => {
                 return(
                     <TouchableOpacity key={song._id} onPress={() => {hadlePlaylistSelection(song._id)}}>
-                        <Image source={song.url} style={styles.playlistCape}/>
+                        <Image source={{uri: song.image}} style={styles.playlistCape}/>
                     </TouchableOpacity>
                 )
             }) : 
             songs.map((song:any) => {
                 return(
                     <TouchableOpacity key={song._id} onPress={() => {hadlePlaylistSelection(song._id)}}>
-                        <Image source={song.url} style={styles.playlistCape}/>
+                        <Image source={{uri: song.image}} style={styles.playlistCape}/>
                     </TouchableOpacity>
                 )
             })}

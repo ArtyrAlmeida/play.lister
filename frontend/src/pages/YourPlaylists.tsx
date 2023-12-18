@@ -36,7 +36,7 @@ const YourPlaylists = (props: any) => {
 
     return (
         <>
-            <Header userName={user && user.name} navigation={props.navigation}/>
+            <Header image={user && user.image} userName={user && user.name} navigation={props.navigation}/>
             <View style={styles.pageWrapper}>
                 <Text style={styles.heading}>Suas Playlists</Text>
                 <View style={styles.playlistList}>
@@ -44,7 +44,7 @@ const YourPlaylists = (props: any) => {
                         keyExtractor={item => item._id as string} 
                         data={playlists}
                         ItemSeparatorComponent={() => (<View style={styles.horizontalLine}></View>)}
-                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} songs={item.songs} date={item.createdAt} id={item._id as string} author={item.author} />}
+                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} image={item.image} songs={item.songs} date={item.createdAt} id={item._id as string} author={item.author} />}
                         />
                 </View>
             </View>

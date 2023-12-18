@@ -4,6 +4,7 @@ interface SongInterface {
     length: string,
     description: string,
     author: string,
+    image: string,
 }
 
 interface PlaylistInterface {
@@ -12,7 +13,8 @@ interface PlaylistInterface {
     description: string,
     createdAt?: Date | string,
     author: string,
-    songs: string[]
+    songs: string[],
+    image: string,
 }
 
 interface UserInterface {
@@ -21,6 +23,7 @@ interface UserInterface {
     email: string,
     password: string,
     playlists?: string[],
+    image: string,
 }
 
 interface LoginInfo {

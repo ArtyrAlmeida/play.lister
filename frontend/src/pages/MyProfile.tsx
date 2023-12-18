@@ -37,10 +37,10 @@ const MyProfile = ({navigation}:any) => {
 
     return(
         <>
-        <Header userName={user && user.name} navigation={navigation}/>
+        <Header image={user && user.image} userName={user && user.name} navigation={navigation}/>
         <View style={styles.pageWrapper}>
             <View>
-                <UserImage userName={user && user.name}/>
+                <UserImage image={user.image} userName={user && user.name}/>
             </View>
             <View style={styles.mapWrapper}>
                 <Text style={styles.playlistText}>Suas Playlists</Text>

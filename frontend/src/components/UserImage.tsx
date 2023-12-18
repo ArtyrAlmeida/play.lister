@@ -5,7 +5,7 @@ const userIcon = require('../assets/icons/user-icon.png');
 const UserImage = (props: any) => {
     return (
         <View style={styles.userWrapper}>
-            <Image source={userIcon} style={styles.userImage} />
+            <Image source={{ uri: props.image }} style={styles.userImage} />
             <Text style={styles.heading}>{props.userName}</Text>
         </View>
     )
