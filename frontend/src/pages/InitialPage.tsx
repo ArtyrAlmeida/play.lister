@@ -18,10 +18,10 @@ const InitialPage = ({navigation}: any) => {
                 const json = JSON.parse(user!);
                 console.log(json)
                 setUser(json);
+                updatePlaylists();
             }).catch((error) => {
                 console.log(error)
             })
-            updatePlaylists();
         }, [])
     )
     const updatePlaylists = async () => {

@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
     userImage: {
         width: 29,
         height: 29,
-        position: 'relative',
+        position: 'absolute',
         top: 40,
-        right: -70,
+        right: -105,
         borderRadius: 100
     }
 })

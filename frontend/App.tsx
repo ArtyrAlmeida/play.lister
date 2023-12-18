@@ -12,6 +12,7 @@ import PlaylistDetail from './src/pages/PlaylistDetail';
 import { MyProfile } from './src/pages/MyProfile';
 import { AddOrEditPlaylist } from './src/pages/AddOrEditPlaylist';
 import OtherUserProfile from './src/pages/OtherUserProfile';
+import YourPlaylists from './src/pages/YourPlaylists';
 
 export default function App() {
 
@@ -28,7 +29,7 @@ export default function App() {
             <Stack.Screen name='OtherUserProfile' component={OtherUserProfile} />
             <Stack.Screen name='MyProfile' component={MyProfile} />
             <Stack.Screen name='CreatePlaylist' component={AddOrEditPlaylist} />
-
+            <Stack.Screen name='YourPlaylist' component={YourPlaylists} />
           </Stack.Navigator>
         </NavigationContainer>
       

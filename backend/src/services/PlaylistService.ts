@@ -27,7 +27,7 @@ export default class playlistservice {
         log(response)
 
         const formattedDates = response.map(playlist => {
-            const date = new Date(playlist.createdAt);
+            const date = new Date(playlist.createdAt!);
             const day =  date.getDate();
             const month = date.getMonth() + 1;
             const year = date.getFullYear();
@@ -62,7 +62,16 @@ export default class playlistservice {
         }
         const response = await this.repository.findByUser(id);
 
-        return response;
+        const formattedDates = response.map(playlist => {
+            const date = new Date(playlist.createdAt!);
+            const day =  date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+            return { ...playlist.toObject(), createdAt: formattedDate };
+        })
+
+        return formattedDates;
     };
 
     updateOne = async (id: string, payload: object) => {

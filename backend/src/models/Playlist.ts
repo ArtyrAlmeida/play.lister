@@ -23,7 +23,7 @@ const plalistSchema = new Schema<PlaylistInterface>({
     },
     createdAt: {
         type: Date,
-        required: true,
+        required: false,
     }
 }, { timestamps: true });
 
