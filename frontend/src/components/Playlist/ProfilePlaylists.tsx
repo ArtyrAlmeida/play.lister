@@ -1,9 +1,13 @@
 import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native"
 
-const ProfilePlaylists = ({songs}:any) => {
+const ProfilePlaylists = ({songs, navigation}:any) => {
 
-    const hadlePlaylistSelection = () => {
-        return
+    const hadlePlaylistSelection = ({_id}: any) => {
+        navigation.navigate("EditPlaylist", { _id })
+    }
+
+    const handleViewMore = () => {
+        navigation.navigate("YourPlaylist")
     }
 
     return(
@@ -11,20 +15,20 @@ const ProfilePlaylists = ({songs}:any) => {
             {songs.length >= 9 ? 
             songs.slice(0,8).map((song:any) => {
                 return(
-                    <TouchableOpacity key={song._id} onPress={hadlePlaylistSelection}>
+                    <TouchableOpacity key={song._id} onPress={() => {hadlePlaylistSelection(song._id)}}>
                         <Image source={song.url} style={styles.playlistCape}/>
                     </TouchableOpacity>
                 )
             }) : 
             songs.map((song:any) => {
                 return(
-                    <TouchableOpacity key={song._id} onPress={hadlePlaylistSelection}>
+                    <TouchableOpacity key={song._id} onPress={() => {hadlePlaylistSelection(song._id)}}>
                         <Image source={song.url} style={styles.playlistCape}/>
                     </TouchableOpacity>
                 )
             })}
             {songs.length >= 9 ? 
-            <TouchableOpacity key={songs[8]._id} onPress={hadlePlaylistSelection}>
+            <TouchableOpacity key={songs[8]._id} onPress={handleViewMore}>
                 <Text style={styles.playlistCape}>Ver mais</Text>
             </TouchableOpacity> :
             null

@@ -7,12 +7,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { Map } from "../components/Map/Map";
 import Header from "../components/Header";
+import { fetchUserPlaylists } from "../api/fetchUserPlaylists";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const loggout = require("../assets/icons/loggout.png")
 
 const MyProfile = ({navigation}:any) => {
-
-    const songs:any = [{url: "", _id: "1"},{url: "", _id: "2"},{url: "", _id: "3"},{url: "", _id: "4"},{url: "", _id: "5"},{url: "", _id: "6"},{url: "" , _id: "7"},{url: "" , _id: "8"},{url: "" , _id: "9"}];
 
     const handleLogout = () => {
         AsyncStorage.setItem("@user", "").then(() => {
@@ -21,15 +21,19 @@ const MyProfile = ({navigation}:any) => {
             console.log(error)
         })
     }
-    const [user, setUser] = useState<any>();
+
+    const context = useAuthContext();
+    const userContext = JSON.parse(context.user)
+    
+    const [user, setUser] = useState<any>(userContext);
+    const [playlists, setPlaylists] = useState<any[]>();
+
     useEffect(() => {
-        AsyncStorage.getItem("@user").then((user):any => {
-            const json = JSON.parse(user!);
-            setUser(json);
-        }).catch((error) => {
-            console.log(error)
+        fetchUserPlaylists(user.id)
+        .then((playlists) => {
+            setPlaylists(playlists)
         })
-    }, []);
+    },[user])
 
     return(
         <>
@@ -43,7 +47,7 @@ const MyProfile = ({navigation}:any) => {
                 <Map/>
             </View>
             <View style={styles.playlistWrapper}>
-                {songs.length > 0 ? <ProfilePlaylists songs={songs}></ProfilePlaylists> : <Text style={styles.playlistText}>Ainda não existe nada aqui</Text>}
+                {(playlists && playlists.length > 0) ? <ProfilePlaylists songs={playlists} navigation={navigation}></ProfilePlaylists> : <Text style={styles.playlistText}>Ainda não existe nada aqui</Text>}
             </View>
 
             <Button containerStyle={styles.overAllButton} textStyle={styles.loginButton} title="Sair" onPress={handleLogout} icon={loggout}/>
