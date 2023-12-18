@@ -1,22 +1,38 @@
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, FlatList } from "react-native";
 import YourPlaylist from "../components/Playlist/YourPlaylist";
 import UserImage from "../components/UserImage";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "../components/Header";
+import { PlaylistInterface } from "../../interfaces";
+import { fetchUserPlaylists } from "../api/fetchUserPlaylists";
+import Footer from "../components/Footer";
+import { useFocusEffect } from "@react-navigation/native";
+import React from "react";
 
 
 const OtherUserProfile = (props: any) => {
     //findUserById no outro user -> return de name > userImage userName={result && result.name}
+    const [playlists, setPlaylists] = useState<PlaylistInterface[] | []>([]);
     const [user, setUser] = useState<any>();
-    useEffect(() => {
+    useFocusEffect(React.useCallback(() => {
         AsyncStorage.getItem("@user").then((user):any => {
             const json = JSON.parse(user!);
             setUser(json);
+            fetchPlaylists();
         }).catch((error) => {
             console.log(error)
         })
-    }, []);
+    }, []));
+
+    const fetchPlaylists = async () => {
+        const playlistResponse = await fetchUserPlaylists(props.route.params._id)
+        setPlaylists(playlistResponse);
+    } 
+
+    const handlePlaylistPress = (id: string, name: string, date: string) => {
+        props.navigation.navigate('PlaylistDetail', { id, name, date });
+    }
 
     return (
         <>
@@ -24,13 +40,15 @@ const OtherUserProfile = (props: any) => {
             <View style={styles.pageWrapper}>
                 <UserImage />
                 <View style={styles.playlistList}>
-                    <Text style={styles.heading}>{props.userName}</Text>
-                    <YourPlaylist />
-                    <YourPlaylist />
-                    <YourPlaylist />
-                    <YourPlaylist />
+                    <Text style={styles.heading}>{props.route.params.name}</Text>
+                    <FlatList
+                        keyExtractor={item => item._id as string} 
+                        data={playlists}
+                        renderItem={({item}) => <YourPlaylist onPlaylistPress={handlePlaylistPress} name={item.name} songs={item.songs} date={item.createdAt} id={item._id as string} author={item.author} />}
+                    />
                 </View>
             </View>
+            <Footer navigation={props.navigation}/>
         </>
     )
 }
@@ -41,6 +59,7 @@ const styles = StyleSheet.create({
         paddingTop: 29,
         width: '100%',
         backgroundColor: "#131112",
+        flex: 1
     },
     playlistList: {
         gap: 11

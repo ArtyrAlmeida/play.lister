@@ -6,16 +6,15 @@ import { SongInterface } from "../../interfaces";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useFocusEffect } from "@react-navigation/native";
+import React from "react";
 
 const homeIcon = require('../assets/icons/home-icon.png');
 
 const PlaylistDetail = ({ navigation, route }: any) => {
     const { id, name, date } = route.params;
     const [songs, setSongs] = useState<SongInterface[] | []>([])
-
-    useEffect(() => {
-        fetchSongs()
-    }, []);
+    const [user, setUser] = useState<any>();
 
     const fetchSongs = async () => {
         const playlistSongs = await fetchPlaylistSongs(id);
@@ -24,15 +23,15 @@ const PlaylistDetail = ({ navigation, route }: any) => {
         setSongs(playlistSongs);
     }
 
-    const [user, setUser] = useState<any>();
-    useEffect(() => {
+    useFocusEffect(React.useCallback(() => {
         AsyncStorage.getItem("@user").then((user): any => {
             const json = JSON.parse(user!);
             setUser(json);
+            fetchSongs()
         }).catch((error) => {
             console.log(error)
         })
-    }, []);
+    }, []));
 
     return (
         <>

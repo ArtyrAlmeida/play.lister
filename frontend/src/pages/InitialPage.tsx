@@ -1,27 +1,29 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import MainPlaylist from "../components/Playlist/MainPlaylist";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchPlaylists } from "../api/fetchPlaylists";
 import { PlaylistInterface } from "../../interfaces";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchUser } from "../api/fetchUser";
+import { useFocusEffect } from "@react-navigation/native";
 
 const InitialPage = ({navigation}: any) => {
     const [playlists, setPlaylists] = useState<PlaylistInterface[] | []>([]);
     const [user, setUser] = useState<any>();
-    useEffect(() => {
-        AsyncStorage.getItem("@user").then((user):any => {
-            const json = JSON.parse(user!);
-            console.log(json)
-            setUser(json);
-        }).catch((error) => {
-            console.log(error)
-        })
-        updatePlaylists();
-    }, []);
-
+    useFocusEffect(
+        React.useCallback(() => {
+            AsyncStorage.getItem("@user").then((user):any => {
+                const json = JSON.parse(user!);
+                console.log(json)
+                setUser(json);
+            }).catch((error) => {
+                console.log(error)
+            })
+            updatePlaylists();
+        }, [])
+    )
     const updatePlaylists = async () => {
         const playlists = await fetchPlaylists();
         setPlaylists(playlists);
@@ -33,6 +35,8 @@ const InitialPage = ({navigation}: any) => {
 
     const handleProfilePress = async (id: string) => {
         const user = await fetchUser(id);
+        console.log(user);
+        
         navigation.navigate('OtherUserProfile', user)
     }
 

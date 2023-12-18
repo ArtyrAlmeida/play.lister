@@ -2,20 +2,31 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 const homeIcon = require('../../assets/icons/home-icon.png');
 
-const MainPlaylist = (props: any) => {
+interface YourPlaylistProps {
+    name: string;
+    songs: string[];
+    date: string;
+    id: string;
+    author: string;
+    onPlaylistPress: (id: string, name: string, date: string) => void;
+}
+
+const YourPlaylist = (props: YourPlaylistProps) => {
     return (
-        <View>
-            <View style={styles.playlist}>
-                <Image style={styles.playlistImage} source={homeIcon} />
-                <View>
-                    <View style={styles.textArea}>
-                        <Text style={styles.header}>Pra curtir o verão todo</Text>
-                        <Text style={styles.secondaryText}>X Musicas</Text>
+        <Pressable onPress={() => props.onPlaylistPress(props.id, props.name, props.date)}>
+            <View>
+                <View style={styles.playlist}>
+                    <Image style={styles.playlistImage} source={homeIcon} />
+                    <View>
+                        <View style={styles.textArea}>
+                            <Text style={styles.header}>{props.name}</Text>
+                            <Text style={styles.secondaryText}>{props.songs.length} Musicas</Text>
+                        </View>
+                        <Text style={styles.secondaryText}>Postado em: {props.date}</Text>
                     </View>
-                    <Text style={styles.secondaryText}>Postado em: XX/XX/XXXX</Text>
                 </View>
             </View>
-        </View>
+        </Pressable>
     )
 }
 
@@ -46,4 +57,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default MainPlaylist;
+export default YourPlaylist;
