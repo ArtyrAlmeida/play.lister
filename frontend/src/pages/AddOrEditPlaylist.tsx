@@ -80,7 +80,7 @@ const AddOrEditPlaylist = ({navigation, route}:any) => {
                         ItemSeparatorComponent={() => <View style={{height: 7}} />}
                         keyExtractor={(item) => item._id as string} 
                         data={songs}
-                        renderItem={({item, index}) => <Song name={item.name} songs={item.songs} date={item.createdAt} id={item._id as string} key={index}/>}
+                        renderItem={({item, index}) => <Song titulo={item.titulo} album={item.album} genero={item.genero} artista={item.artista} id={item._id as string} key={index}/>}
           />}
         </View>
     )

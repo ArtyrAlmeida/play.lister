@@ -11,6 +11,7 @@ const AddSongModal = ({handleSongAdition}:any) => {
     const { control, handleSubmit, formState:{errors} } = useForm<ISongSchema>({resolver: zodResolver(songSchema)});
 
     const handleAddSong = async (data:any) => {
+        console.log(data)
         handleSongAdition(data)
     }
 
