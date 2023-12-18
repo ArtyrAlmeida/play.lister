@@ -5,6 +5,7 @@ import { Button } from "../components/Button/Button";
 import Footer from "../components/Footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
+import { Map } from "../components/Map/Map";
 
 const loggout = require("../assets/icons/loggout.png")
 
@@ -35,9 +36,12 @@ const MyProfile = ({navigation}:any) => {
             <View>
                 <UserImage userName={user && user.name}/>
             </View>
-            <Text>Suas Playlists</Text>
+            <View style={styles.mapWrapper}>
+                <Text style={styles.playlistText}>Suas Playlists</Text>
+                <Map/>
+            </View>
             <View style={styles.playlistWrapper}>
-                {songs.length > 0 ? <ProfilePlaylists songs={songs}></ProfilePlaylists> : <Text>Ainda não existe nada aqui</Text>}
+                {songs.length > 0 ? <ProfilePlaylists songs={songs}></ProfilePlaylists> : <Text style={styles.playlistText}>Ainda não existe nada aqui</Text>}
             </View>
 
             <Button containerStyle={styles.overAllButton} textStyle={styles.loginButton} title="Sair" onPress={handleLogout} icon={loggout}/>
@@ -52,8 +56,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#131112",
         alignItems: "center",
-        textAlign: "left",
         gap: 20
+    },
+    mapWrapper: {
+        flexDirection: "row",
+        alignItems: "flex-end",
+        gap: 50,
+    },
+    playlistText: {
+        color: "white"
     },
     playlistWrapper: {
         width: "100%",
@@ -65,13 +76,14 @@ const styles = StyleSheet.create({
     },
     overAllButton:{
         backgroundColor: "#D9D9D9",
+        flexDirection: "row",
         width: 100,
         padding: 20,
+        gap: 20,
         borderRadius: 20,
     },
     loginButton:{
         color: "red",
-        textAlign: "right"
     }
 
 })

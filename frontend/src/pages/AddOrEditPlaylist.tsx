@@ -54,7 +54,7 @@ const AddOrEditPlaylist = ({navigation, route}:any) => {
     }
 
     return(
-        <View>
+        <View style={styles.page}>
           <Header userName={user && user.name} navigation={navigation}/>
           {isActive && 
           <View style={styles.modalWrapper}>
@@ -65,17 +65,19 @@ const AddOrEditPlaylist = ({navigation, route}:any) => {
                 <InputCamp 
                 placeholder="Título"
                 onChangeText={handleTitleChange}
-                      value={playlistName}></InputCamp>
-                <Text style={styles.date}>{"date"}</Text>
+                value={playlistName}></InputCamp>
           </View>
           <PlaylistPrivacy isPrivate={playlistPrivacy} onPress={handlePrivacyChange}></PlaylistPrivacy>
-          <TouchableOpacity onPress={() => { setIsActive((state)=> { return !state })}}>
-              <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Adicionar Musica" onPress={handleActivateModal}/>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setIsActive((state)=> { return !state })}}>
-              <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Criar Playlist" onPress={handleAddPlaylist}/>
-          </TouchableOpacity>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity onPress={() => { setIsActive((state)=> { return !state })}}>
+                <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Adicionar Musica" onPress={handleActivateModal}/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { setIsActive((state)=> { return !state })}}>
+                <Button containerStyle={styles.overAllButton} textStyle={styles.addButton} title="Criar Playlist" onPress={handleAddPlaylist}/>
+            </TouchableOpacity>
+          </View>
           {songs && <FlatList
+                        ItemSeparatorComponent={() => <View style={{height: 7}} />}
                         keyExtractor={(item) => item._id as string} 
                         data={songs}
                         renderItem={({item, index}) => <Song name={item.name} songs={item.songs} date={item.createdAt} id={item._id as string} key={index}/>}
@@ -89,6 +91,11 @@ const styles = StyleSheet.create({
       flexDirection: "column",
       alignItems: "center",
     },
+    page: {
+      flex: 1,
+      backgroundColor: "#131112",
+      gap: 5
+    },
     modalWrapper: {
       zIndex: 1,
       height: "100%",
@@ -98,21 +105,21 @@ const styles = StyleSheet.create({
         color: "#000",
         textAlign: "center"
     },
-    buttonContainer: {
+    buttonWrapper:{
       flexDirection: "row",
-      alignItems: "center",
       justifyContent: "center",
-      width: "100%",
+      paddingVertical: 10,
+      borderRadius: 30,
+      gap: 40
     },
     overAllButton: {
       backgroundColor: "#D9D9D9",
       padding: 10,
       borderRadius: 40,
-      width: "35%",
       alignContent: "center"
     },
     playlistInfo: {
-      alignItems: 'center',
+      alignItems: "center",
       marginBottom: 24
   },
   playlistImage: {
@@ -132,7 +139,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#D9D9D9',
       borderRadius: 20,
       minHeight: 460,
-      gap: 9
+      gap: 10
   },
   title: {
       fontSize: 12,
